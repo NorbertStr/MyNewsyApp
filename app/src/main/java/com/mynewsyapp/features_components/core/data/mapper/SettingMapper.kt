@@ -1,0 +1,24 @@
+package com.mynewsyapp.features_components.core.data.mapper
+
+class SettingMapper : Mapper<SettingsDto?, Setting> {
+    override fun toModel(value: SettingsDto?): Setting {
+        return value?.run {
+            Setting(
+                preferredCountryIndex = preferredCountry ?: 0,
+                preferredLanguageIndex = preferredLanguage ?: 0
+            )
+        } ?: Setting(
+            preferredLanguageIndex = 0,
+            preferredCountryIndex = 0
+        )
+    }
+
+    override fun fromModel(value: Setting): SettingsDto {
+        return value.run {
+            SettingsDto(
+                preferredLanguage = preferredLanguageIndex,
+                preferredCountry = preferredCountryIndex
+            )
+        }
+    }
+}
