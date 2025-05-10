@@ -1,5 +1,10 @@
 package com.mynewsyapp.features_components.discover.domain.use_cases
 
+import androidx.paging.PagingData
+import com.mynewsyapp.features_components.core.domain.models.NewsyArticle
+import com.mynewsyapp.features_components.discover.domain.repository.DiscoverRepository
+import kotlinx.coroutines.flow.Flow
+
 class FetchDiscoverArticleUseCase(
     private val repository: DiscoverRepository
 ) {
@@ -10,3 +15,11 @@ class FetchDiscoverArticleUseCase(
     ):Flow<PagingData<NewsyArticle>> =
         repository.fetchDiscoverArticles(category, country, language)
 }
+
+
+
+
+
+
+
+

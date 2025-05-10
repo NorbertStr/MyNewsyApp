@@ -1,5 +1,19 @@
 package com.mynewsyapp.features_components.discover.data.paging
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadType
+import androidx.paging.PagingState
+import androidx.paging.RemoteMediator
+import androidx.room.withTransaction
+import com.mynewsyapp.features_components.core.data.local.NewsyArticleDatabase
+import com.mynewsyapp.features_components.core.data.remote.models.toDiscoverArticle
+import com.mynewsyapp.features_components.discover.data.local.models.DiscoverArticleDto
+import com.mynewsyapp.features_components.discover.data.local.models.DiscoverKeys
+import com.mynewsyapp.features_components.discover.data.remote.DiscoverApi
+import retrofit2.HttpException
+import java.io.IOException
+import java.util.concurrent.TimeUnit
+
 @OptIn(ExperimentalPagingApi::class)
 class DiscoverMediator(
     private val api: DiscoverApi,

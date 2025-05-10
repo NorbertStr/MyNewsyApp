@@ -1,5 +1,10 @@
 package com.mynewsyapp.features_components.headline.data.remote
 
+import com.mynewsyapp.features_components.core.data.remote.models.NewsyRemoteDto
+import com.mynewsyapp.utils.K
+import retrofit2.http.GET
+import retrofit2.http.Query
+
 interface HeadlineApi {
     companion object {
         private const val HEADLINE_END_POINT = "/v2/top-headlines"
@@ -13,7 +18,7 @@ interface HeadlineApi {
         @Query("language") language: String,
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int,
-    ):NewsyRemoteDto
+    ): NewsyRemoteDto
 
 
 

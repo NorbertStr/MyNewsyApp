@@ -6,13 +6,11 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.mynewsyapp.features_components.core.data.local.models.SettingsDto
 
+@Dao
 interface SettingDao {
-    @Dao
-    interface SettingDao {
-        @Query("SELECT * FROM setting_table")
-        suspend fun getSettings(): SettingsDto
+    @Query("SELECT * FROM setting_table")
+    suspend fun getSettings(): SettingsDto
 
-        @Insert(onConflict = OnConflictStrategy.REPLACE)
-        suspend fun insertSetting(settingsDto: SettingsDto)
-    }
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertSetting(settingsDto: SettingsDto)
 }

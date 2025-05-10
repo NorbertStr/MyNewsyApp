@@ -1,5 +1,9 @@
 package com.mynewsyapp.features_components.headline.data.local.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
 @Entity("headline_key")
 data class HeadlineRemoteKey(
     @PrimaryKey(autoGenerate = false)

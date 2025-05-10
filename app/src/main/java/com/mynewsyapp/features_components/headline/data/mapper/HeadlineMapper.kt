@@ -1,6 +1,10 @@
 package com.mynewsyapp.features_components.headline.data.mapper
 
-class HeadlineMapper:Mapper<HeadlineDto,NewsyArticle> {
+import com.mynewsyapp.features_components.core.domain.mapper.Mapper
+import com.mynewsyapp.features_components.core.domain.models.NewsyArticle
+import com.mynewsyapp.features_components.headline.data.local.model.HeadlineDto
+
+class HeadlineMapper: Mapper<HeadlineDto, NewsyArticle> {
     override fun toModel(value: HeadlineDto): NewsyArticle {
         return value.run {
             NewsyArticle(

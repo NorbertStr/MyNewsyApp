@@ -1,5 +1,10 @@
 package com.mynewsyapp.features_components.favourite.data.dao
 
+import androidx.paging.PagingSource
+import androidx.room.Dao
+import androidx.room.Query
+import com.mynewsyapp.features_components.favourite.data.models.FavouriteDto
+
 @Dao
 interface FavouriteDao {
     @Query(
@@ -12,4 +17,17 @@ interface FavouriteDao {
         """
     )
     fun getAllFavouriteArticles(): PagingSource<Int, FavouriteDto>
+
+    @Query(
+        "UPDATE discover_article SET favourite=:isFavourite WHERE id=:id"
+    )
+    suspend fun updateFavouriteArticle(isFavourite: Boolean, id: Int): Int
+    @Query(
+        "UPDATE headline_table SET favourite=:isFavourite WHERE id=:id"
+    )
+    suspend fun updateHeadlineArticle(isFavourite: Boolean, id: Int): Int
+    @Query(
+        "UPDATE search_table SET favourite=:isFavourite WHERE id=:id"
+    )
+    suspend fun updateSearchArticle(isFavourite: Boolean, id: Int): Int
 }

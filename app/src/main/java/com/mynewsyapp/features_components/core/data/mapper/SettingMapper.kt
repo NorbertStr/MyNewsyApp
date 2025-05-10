@@ -1,5 +1,9 @@
 package com.mynewsyapp.features_components.core.data.mapper
 
+import com.mynewsyapp.features_components.core.data.local.models.SettingsDto
+import com.mynewsyapp.features_components.core.domain.mapper.Mapper
+import com.mynewsyapp.features_components.core.domain.models.Setting
+
 class SettingMapper : Mapper<SettingsDto?, Setting> {
     override fun toModel(value: SettingsDto?): Setting {
         return value?.run {

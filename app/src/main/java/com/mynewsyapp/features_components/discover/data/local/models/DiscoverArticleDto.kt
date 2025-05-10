@@ -1,5 +1,10 @@
 package com.mynewsyapp.features_components.discover.data.local.models
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.mynewsyapp.features_components.core.data.local.models.LocalContractDto
+
 @Entity(tableName = "discover_article")
 data class DiscoverArticleDto(
     @PrimaryKey(autoGenerate = true)

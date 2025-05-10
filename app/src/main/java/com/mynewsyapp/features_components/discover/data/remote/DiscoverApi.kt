@@ -1,7 +1,9 @@
 package com.mynewsyapp.features_components.discover.data.remote
 
-import androidx.room.Query
+import com.mynewsyapp.features_components.core.data.remote.models.NewsyRemoteDto
+import com.mynewsyapp.utils.K
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface DiscoverApi {
     companion object {
@@ -23,3 +25,11 @@ interface DiscoverApi {
 
 
 }
+
+
+
+
+
+
+
+

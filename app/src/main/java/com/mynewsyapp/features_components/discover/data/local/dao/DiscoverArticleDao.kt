@@ -1,9 +1,13 @@
 package com.mynewsyapp.features_components.discover.data.local.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.mynewsyapp.features_components.discover.data.local.models.DiscoverArticleDto
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DiscoverArticleDao {
@@ -28,3 +32,15 @@ interface DiscoverArticleDao {
     )
     suspend fun updateFavouriteArticle(isFavourite: Boolean, id: Int): Int
 }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,8 @@
 package com.mynewsyapp.features_components.favourite.data.models
 
+import androidx.room.ColumnInfo
+import com.mynewsyapp.features_components.core.data.local.models.LocalContractDto
+
 data class FavouriteDto(
     override val id: Int,
     override val author: String,
@@ -16,4 +19,3 @@ data class FavouriteDto(
     override val category: String,
     override var page: Int,
 ) : LocalContractDto()
-

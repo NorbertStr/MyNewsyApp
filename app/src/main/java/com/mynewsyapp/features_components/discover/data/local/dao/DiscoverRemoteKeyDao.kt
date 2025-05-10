@@ -1,5 +1,11 @@
 package com.mynewsyapp.features_components.discover.data.local.dao
 
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.mynewsyapp.features_components.discover.data.local.models.DiscoverKeys
+
 @Dao
 interface DiscoverRemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -8,7 +14,7 @@ interface DiscoverRemoteKeyDao {
     @Query(
         "SELECT * FROM discover_keys WHERE article_id=:id"
     )
-    suspend fun getRemoteKeyByArticleId(id:String):DiscoverKeys?
+    suspend fun getRemoteKeyByArticleId(id:String): DiscoverKeys?
 
     @Query("DELETE FROM discover_keys WHERE current_category=:category")
     suspend fun clearRemoteKey(category:String)

@@ -1,5 +1,9 @@
 package com.mynewsyapp.features_components.discover.domain.repository
 
+import androidx.paging.PagingData
+import com.mynewsyapp.features_components.core.domain.models.NewsyArticle
+import kotlinx.coroutines.flow.Flow
+
 interface DiscoverRepository {
     fun fetchDiscoverArticles(
         category: String,

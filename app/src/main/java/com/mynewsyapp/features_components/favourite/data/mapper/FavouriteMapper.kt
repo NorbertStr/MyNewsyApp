@@ -1,6 +1,10 @@
 package com.mynewsyapp.features_components.favourite.data.mapper
 
-class FavouriteMapper:Mapper<FavouriteDto,FavouriteArticle> {
+import com.mynewsyapp.features_components.core.domain.mapper.Mapper
+import com.mynewsyapp.features_components.favourite.data.models.FavouriteDto
+import com.mynewsyapp.features_components.favourite.domain.model.FavouriteArticle
+
+class FavouriteMapper: Mapper<FavouriteDto, FavouriteArticle> {
     override fun toModel(value: FavouriteDto): FavouriteArticle {
         return value.run {
             FavouriteArticle(

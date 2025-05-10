@@ -1,5 +1,9 @@
 package com.mynewsyapp.features_components.headline.data.mapper
 
+import com.mynewsyapp.features_components.core.data.remote.models.Article
+import com.mynewsyapp.features_components.core.domain.mapper.Mapper
+import com.mynewsyapp.features_components.headline.data.local.model.HeadlineDto
+
 class ArticleHeadlineDtoMapper(
     private val page: Int = 0,
     private val category: String = "",

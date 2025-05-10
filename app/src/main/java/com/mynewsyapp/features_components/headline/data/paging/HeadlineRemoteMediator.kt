@@ -1,5 +1,19 @@
 package com.mynewsyapp.features_components.headline.data.paging
 
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.LoadType
+import androidx.paging.PagingState
+import androidx.paging.RemoteMediator
+import com.mynewsyapp.features_components.core.data.local.NewsyArticleDatabase
+import com.mynewsyapp.features_components.core.data.remote.models.toHeadlineArticle
+import com.mynewsyapp.features_components.headline.data.local.model.HeadlineDto
+import com.mynewsyapp.features_components.headline.data.local.model.HeadlineRemoteKey
+import com.mynewsyapp.features_components.headline.data.remote.HeadlineApi
+import com.mynewsyapp.utils.K
+import retrofit2.HttpException
+import java.io.IOException
+import java.util.concurrent.TimeUnit
+
 @OptIn(ExperimentalPagingApi::class)
 class HeadlineRemoteMediator(
     private val api: HeadlineApi,
@@ -125,3 +139,8 @@ class HeadlineRemoteMediator(
 
 
 }
+
+
+
+
+

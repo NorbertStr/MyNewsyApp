@@ -1,5 +1,10 @@
 package com.mynewsyapp.features_components.headline.data.local.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.mynewsyapp.features_components.core.data.local.models.LocalContractDto
+
 @Entity(tableName = "headline_table")
 data class HeadlineDto(
     @PrimaryKey(autoGenerate = true)

@@ -1,5 +1,11 @@
 package com.mynewsyapp.features_components.headline.data.local.dao
 
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.mynewsyapp.features_components.headline.data.local.model.HeadlineRemoteKey
+
 @Dao
 interface HeadlineRemoteKeyDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -15,3 +21,11 @@ interface HeadlineRemoteKeyDao {
     suspend fun getCreationTime(): Long?
 
 }
+
+
+
+
+
+
+
+
