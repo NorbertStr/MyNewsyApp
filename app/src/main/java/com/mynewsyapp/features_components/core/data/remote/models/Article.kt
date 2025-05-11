@@ -46,9 +46,9 @@ fun Article.toHeadlineArticle(page: Int, category: String): HeadlineDto {
         author = formatEmptyValue(author, "author"),
         content = formatEmptyValue(content, "content"),
         description = formatEmptyValue(description, "description"),
-        publishedAt = publishedAt,
-        source = source.name,
-        title = title,
+        publishedAt = formatEmptyValue(publishedAt, "date"),
+        source = formatEmptyValue(source.name, "source"),
+        title = formatEmptyValue(title, "title"),
         url = url,
         urlToImage = urlToImage,
         page = page,
@@ -58,7 +58,8 @@ fun Article.toHeadlineArticle(page: Int, category: String): HeadlineDto {
 
 
 private fun formatEmptyValue(value: String?, default: String = ""): String {
-    return value ?: "Unknown $default"
+    if (value.isNullOrEmpty()) return "Unknown $default"
+    return value
 }
 
 

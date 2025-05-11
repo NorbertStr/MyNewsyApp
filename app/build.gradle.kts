@@ -60,6 +60,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    //Test
+    testImplementation ("com.google.truth:truth:1.4.4")
+    androidTestImplementation("com.google.truth:truth:1.4.4")
+
     //Navigation compose
     implementation("androidx.navigation:navigation-compose:2.8.9")
 
