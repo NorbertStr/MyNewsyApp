@@ -2,6 +2,7 @@ package com.mynewsyapp.features_components.core.data.remote.models
 
 import com.google.common.truth.Truth.assertThat
 import com.mynewsyapp.utils.Utils
+import org.junit.Assert.assertThrows
 import org.junit.Test
 
 class ArticleTest {
@@ -32,7 +33,7 @@ class ArticleTest {
     }
 
     @Test
-    fun `toHeadlineArticle should map null or empty value with formated output`(){
+    fun `toHeadlineArticle should map null or empty value with formated output`() {
         //GIVEN
         val articles = Article()
 
@@ -48,6 +49,29 @@ class ArticleTest {
         assertThat(headlineDto.publishedAt).isEqualTo("Unknown date")
         assertThat(headlineDto.url).isEmpty()
         assertThat(headlineDto.urlToImage).isNull()
+    }
+
+    @Test
+    fun `ToHeadlineArticle should throw IllegalArgument Exc when category is empty`() {
+
+        //GIVEN
+        val article = Article()
+
+        //WHEN
+        assertThrows(IllegalArgumentException::class.java){
+            article.toHeadlineArticle(0, "")
+        }
+    }
+
+    @Test
+    fun `toHeadlineArticle should throw IndexOutOfBoundException when page is -ve `(){
+        //GIVEN
+        val article = Article()
+
+        //WHEN
+        assertThrows(IndexOutOfBoundsException::class.java){
+            article.toHeadlineArticle(-1, "sports")
+        }
     }
 
 }

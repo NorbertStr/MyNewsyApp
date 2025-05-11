@@ -42,6 +42,11 @@ fun Article.toDiscoverArticle(page: Int, category: String): DiscoverArticleDto {
 }
 
 fun Article.toHeadlineArticle(page: Int, category: String): HeadlineDto {
+
+    if(category.isEmpty()) throw  IllegalArgumentException("category can not be empty")
+    if (page < 0 ) throw IndexOutOfBoundsException("page accepts only positive values, but $page was passed")
+
+
     return HeadlineDto(
         author = formatEmptyValue(author, "author"),
         content = formatEmptyValue(content, "content"),
