@@ -27,10 +27,13 @@ data class Article(
 )
 
 fun Article.toDiscoverArticle(page: Int, category: String): DiscoverArticleDto {
+
+    if(category.isEmpty()) throw  IllegalArgumentException("category can not be empty")
+    if(page < 0) throw IndexOutOfBoundsException("page can not be less than 0")
     return DiscoverArticleDto(
         author = author,
         content = content ?: "empty value",
-        description = description ?: " empty value",
+        description = description ?: "empty value",
         publishedAt = publishedAt,
         title = title,
         source = source.name,

@@ -74,4 +74,68 @@ class ArticleTest {
         }
     }
 
+    @Test
+    fun `toDiscoverArticle should map to discover correctly`(){
+
+        //GIVEN
+        val article = Utils.testArticles[3]
+
+
+        //When
+        val discoverDto = article.toDiscoverArticle(1,"Finance")
+
+        //Then
+        assertThat(discoverDto.author).isEqualTo(article.author)
+        assertThat(discoverDto.description).isEqualTo(article.description)
+        assertThat(discoverDto.content).isEqualTo(article.content)
+        assertThat(discoverDto.publishedAt).isEqualTo(article.publishedAt)
+        assertThat(discoverDto.title).isEqualTo(article.title)
+        assertThat(discoverDto.source).isEqualTo(article.source.name)
+        assertThat(discoverDto.url).isEqualTo(article.url)
+        assertThat(discoverDto.urlToImage).isEqualTo(article.urlToImage)
+    }
+
+    @Test
+    fun `ToDiscoverArticle should map null or empty value with formated output`(){
+        //Given
+        val article = Article()
+
+        //When
+        val discoverDto = article.toDiscoverArticle(1,"Sport")
+
+        //Then
+        assertThat(discoverDto.author).isEqualTo("")
+        assertThat(discoverDto.content).isEqualTo("empty value")
+        assertThat(discoverDto.description).isEqualTo("empty value")
+        assertThat(discoverDto.publishedAt).isEqualTo("")
+        assertThat(discoverDto. title).isEqualTo("")
+        assertThat(discoverDto.source).isEqualTo("")
+        assertThat(discoverDto.url).isEqualTo("")
+        assertThat(discoverDto.urlToImage).isNull()
+    }
+
+    @Test
+    fun `ToDiscoverArticle should throw IllegalArgument Exc when category is empty`(){
+
+        //Given
+        val article = Article()
+
+        //When
+        assertThrows(IllegalArgumentException::class.java){
+            article.toDiscoverArticle(1, "")
+        }
+    }
+
+    @Test
+    fun `ToDiscoverArticle should throw IndexOutOfBoundsException when page is less than 0`(){
+
+        //Given
+        val article = Article()
+
+        //When
+        assertThrows(IndexOutOfBoundsException::class.java){
+            article.toDiscoverArticle(-2, "sport")
+        }
+    }
+
 }
