@@ -35,7 +35,7 @@ interface HeadlineDao {
 
 }
 
-
+fun a(){}
 
 
 

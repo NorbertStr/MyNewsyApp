@@ -63,6 +63,8 @@ dependencies {
     //Test
     testImplementation ("com.google.truth:truth:1.4.4")
     androidTestImplementation("com.google.truth:truth:1.4.4")
+    testImplementation("org.robolectric:robolectric:4.14")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
 
     //Navigation compose
     implementation("androidx.navigation:navigation-compose:2.8.9")
