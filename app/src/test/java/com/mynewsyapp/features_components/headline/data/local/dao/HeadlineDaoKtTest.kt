@@ -1,11 +1,16 @@
 package com.mynewsyapp.features_components.headline.data.local.dao
 
 import androidx.room.Room
+import com.google.common.truth.Truth.assertThat
 import com.mynewsyapp.MainDispatcherRule
 import com.mynewsyapp.features_components.core.data.local.NewsyArticleDatabase
+import com.mynewsyapp.utils.Utils
+import com.mynewsyapp.utils.getTestData
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -33,7 +38,21 @@ class HeadlineDaoKtTest {
     }
 
     @After
-    fun tearDown(){
+    fun tearDown() {
         db.close()
+    }
+
+
+    @Test
+    fun `getAllArticles return all articles from db correctly`() = runTest{
+
+        //GIVEN
+        val expected = Utils.headlineDto[0]
+        headlineDao.insertHeadlineArticle(listOf(expected))
+        //WHEN
+        val actual = headlineDao.getAllHeadlineArticles().getTestData()
+        //THEN
+        assertThat(actual[0]).isEqualTo(expected.copy(id = 1))
+
     }
 }
