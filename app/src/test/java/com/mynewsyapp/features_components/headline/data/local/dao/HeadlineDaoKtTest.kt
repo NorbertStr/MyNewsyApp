@@ -7,7 +7,7 @@ import com.mynewsyapp.features_components.core.data.local.NewsyArticleDatabase
 import com.mynewsyapp.utils.Utils
 import com.mynewsyapp.utils.getTestData
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
+
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -70,13 +70,13 @@ class HeadlineDaoKtTest {
 
         //THEN
         assertThat(actual).isEqualTo(expected[0].copy(1))
-        if (actual != null) {
+
             assertThat(actual.author).isEqualTo(expected[0].author)
             assertThat(actual.content).isEqualTo(expected[0].content)
             assertThat(actual.description).isEqualTo(expected[0].description)
             assertThat(actual.publishedAt).isEqualTo(expected[0].publishedAt)
             assertThat(actual.id).isEqualTo(1)
-        }
+
     }
 
     @Test
@@ -93,20 +93,38 @@ class HeadlineDaoKtTest {
         assertThat(actual.size).isEqualTo(1)
     }
 
+//    @Test
+//    fun `removeFavouriteArticle deletes favourite article from db`() = runTest {
+//        //Given
+//        val headlineArticle = Utils.headlineDto
+//        val headlineArticleFav = Utils.headlineDto[0].copy(favourite = true)
+//        headlineDao.insertHeadlineArticle(listOf(headlineArticleFav))
+//        headlineDao.insertHeadlineArticle(headlineArticle)
+//        //When
+//        headlineDao.removeFavouriteArticle(1)
+//        headlineDao.removeFavouriteArticle(2)
+//        //Then
+//        val actual = headlineDao.getHeadlineArticle(1).first()
+//        val actual2 = headlineDao.getHeadlineArticle(2).first()
+//        assertThat(actual).isNull()
+//        assertThat(actual2).isNotNull()
+//    }
+
     @Test
-    fun `removeFavouriteArticle deletes favourite article from db`() = runTest {
-        //Given
-        val headlineArticle = Utils.headlineDto
-        val headlineArticleFav = Utils.headlineDto[0].copy(favourite = true)
-        headlineDao.insertHeadlineArticle(listOf(headlineArticleFav))
-        headlineDao.insertHeadlineArticle(headlineArticle)
+    fun `updateFavouriteArticle updates favourite status from true to false and from false to true`() = runTest {
+        //GIVEN
+        val favArticle = Utils.headlineDto[0].copy(favourite = true)
+        val notFavArticle = Utils.headlineDto[1].copy(favourite = false)
+        headlineDao.insertHeadlineArticle(listOf(favArticle,notFavArticle))
+
         //When
-        headlineDao.removeFavouriteArticle(1)
-        headlineDao.removeFavouriteArticle(2)
+        headlineDao.updateFavouriteArticle(false,1)
+        headlineDao.updateFavouriteArticle(true,2)
         //Then
-        val actual = headlineDao.getHeadlineArticle(1).first()
+        val actual1 = headlineDao.getHeadlineArticle(1).first()
         val actual2 = headlineDao.getHeadlineArticle(2).first()
-        assertThat(actual).isNull()
-        assertThat(actual2).isNotNull()
+        assertThat(actual1.favourite).isFalse()
+        assertThat(actual2.favourite).isTrue()
+
     }
 }
