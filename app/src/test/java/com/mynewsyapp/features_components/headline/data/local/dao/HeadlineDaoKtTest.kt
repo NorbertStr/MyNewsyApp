@@ -46,7 +46,7 @@ class HeadlineDaoKtTest {
 
 
     @Test
-    fun `getAllArticles return all articles from db correctly`() = runTest{
+    fun `getAllArticles return all articles from db correctly`() = runTest {
 
         //GIVEN
         val expected = Utils.headlineDto[0]
@@ -59,7 +59,7 @@ class HeadlineDaoKtTest {
     }
 
     @Test
-    fun `getHeadlineArticle return article from db correctly`() = runTest{
+    fun `getHeadlineArticle return article from db correctly`() = runTest {
 
         //GIVEN
         val expected = Utils.headlineDto
@@ -70,15 +70,17 @@ class HeadlineDaoKtTest {
 
         //THEN
         assertThat(actual).isEqualTo(expected[0].copy(1))
-        assertThat(actual.author).isEqualTo(expected[0].author)
-        assertThat(actual.content).isEqualTo(expected[0].content)
-        assertThat(actual.description).isEqualTo(expected[0].description)
-        assertThat(actual.publishedAt).isEqualTo(expected[0].publishedAt)
-        assertThat(actual.id).isEqualTo(1)
+        if (actual != null) {
+            assertThat(actual.author).isEqualTo(expected[0].author)
+            assertThat(actual.content).isEqualTo(expected[0].content)
+            assertThat(actual.description).isEqualTo(expected[0].description)
+            assertThat(actual.publishedAt).isEqualTo(expected[0].publishedAt)
+            assertThat(actual.id).isEqualTo(1)
+        }
     }
 
     @Test
-    fun `deleteAllArticle remove all non favorite article in db`() = runTest{
+    fun `deleteAllArticle remove all non favorite article in db`() = runTest {
         //GIVEN
         val favouriteArticle = Utils.headlineDto[0].copy(favourite = true)
         val expected = Utils.headlineDto
@@ -89,5 +91,22 @@ class HeadlineDaoKtTest {
         //THEN
         val actual = headlineDao.getAllHeadlineArticles().getTestData()
         assertThat(actual.size).isEqualTo(1)
+    }
+
+    @Test
+    fun `removeFavouriteArticle deletes favourite article from db`() = runTest {
+        //Given
+        val headlineArticle = Utils.headlineDto
+        val headlineArticleFav = Utils.headlineDto[0].copy(favourite = true)
+        headlineDao.insertHeadlineArticle(listOf(headlineArticleFav))
+        headlineDao.insertHeadlineArticle(headlineArticle)
+        //When
+        headlineDao.removeFavouriteArticle(1)
+        headlineDao.removeFavouriteArticle(2)
+        //Then
+        val actual = headlineDao.getHeadlineArticle(1).first()
+        val actual2 = headlineDao.getHeadlineArticle(2).first()
+        assertThat(actual).isNull()
+        assertThat(actual2).isNotNull()
     }
 }
