@@ -6,6 +6,8 @@ import com.mynewsyapp.MainDispatcherRule
 import com.mynewsyapp.features_components.core.data.local.NewsyArticleDatabase
 import com.mynewsyapp.utils.Utils
 import com.mynewsyapp.utils.getTestData
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
@@ -54,5 +56,38 @@ class HeadlineDaoKtTest {
         //THEN
         assertThat(actual[0]).isEqualTo(expected.copy(id = 1))
 
+    }
+
+    @Test
+    fun `getHeadlineArticle return article from db correctly`() = runTest{
+
+        //GIVEN
+        val expected = Utils.headlineDto
+        headlineDao.insertHeadlineArticle(expected)
+
+        //WHEN
+        val actual = headlineDao.getHeadlineArticle(1).first()
+
+        //THEN
+        assertThat(actual).isEqualTo(expected[0].copy(1))
+        assertThat(actual.author).isEqualTo(expected[0].author)
+        assertThat(actual.content).isEqualTo(expected[0].content)
+        assertThat(actual.description).isEqualTo(expected[0].description)
+        assertThat(actual.publishedAt).isEqualTo(expected[0].publishedAt)
+        assertThat(actual.id).isEqualTo(1)
+    }
+
+    @Test
+    fun `deleteAllArticle remove all non favorite article in db`() = runTest{
+        //GIVEN
+        val favouriteArticle = Utils.headlineDto[0].copy(favourite = true)
+        val expected = Utils.headlineDto
+        headlineDao.insertHeadlineArticle(listOf(favouriteArticle))
+        headlineDao.insertHeadlineArticle(expected)
+        //WHEN
+        headlineDao.removeAllHeadlineArticles()
+        //THEN
+        val actual = headlineDao.getAllHeadlineArticles().getTestData()
+        assertThat(actual.size).isEqualTo(1)
     }
 }
