@@ -1,5 +1,6 @@
 package com.mynewsyapp.features_components.headline.data.local.dao
 
+
 import androidx.room.Room
 import com.google.common.truth.Truth.assertThat
 import com.mynewsyapp.MainDispatcherRule
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -93,22 +95,23 @@ class HeadlineDaoKtTest {
         assertThat(actual.size).isEqualTo(1)
     }
 
-//    @Test
-//    fun `removeFavouriteArticle deletes favourite article from db`() = runTest {
-//        //Given
-//        val headlineArticle = Utils.headlineDto
-//        val headlineArticleFav = Utils.headlineDto[0].copy(favourite = true)
-//        headlineDao.insertHeadlineArticle(listOf(headlineArticleFav))
-//        headlineDao.insertHeadlineArticle(headlineArticle)
-//        //When
-//        headlineDao.removeFavouriteArticle(1)
-//        headlineDao.removeFavouriteArticle(2)
-//        //Then
-//        val actual = headlineDao.getHeadlineArticle(1).first()
-//        val actual2 = headlineDao.getHeadlineArticle(2).first()
-//        assertThat(actual).isNull()
-//        assertThat(actual2).isNotNull()
-//    }
+    @Ignore("test passed when getHeadlineArticle return nullable HeadlineDto")
+    @Test
+    fun `removeFavouriteArticle deletes favourite article from db`() = runTest {
+        //Given
+        val headlineArticle = Utils.headlineDto
+        val headlineArticleFav = Utils.headlineDto[0].copy(favourite = true)
+        headlineDao.insertHeadlineArticle(listOf(headlineArticleFav))
+        headlineDao.insertHeadlineArticle(headlineArticle)
+        //When
+        headlineDao.removeFavouriteArticle(1)
+        headlineDao.removeFavouriteArticle(2)
+        //Then
+        val actual = headlineDao.getHeadlineArticle(1).first()
+        val actual2 = headlineDao.getHeadlineArticle(2).first()
+        assertThat(actual).isNull()
+        assertThat(actual2).isNotNull()
+    }
 
     @Test
     fun `updateFavouriteArticle updates favourite status from true to false and from false to true`() = runTest {
