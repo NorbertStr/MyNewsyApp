@@ -63,8 +63,15 @@ dependencies {
     //Test
     testImplementation ("com.google.truth:truth:1.4.4")
     androidTestImplementation("com.google.truth:truth:1.4.4")
+    testImplementation("androidx.room:room-testing:2.7.1")
     testImplementation("org.robolectric:robolectric:4.14")
     testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    androidTestImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2")
+    testImplementation("androidx.paging:paging-testing:3.3.6")
+
+    //mockWebServer
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
+    androidTestImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
 
     //Navigation compose
     implementation("androidx.navigation:navigation-compose:2.8.9")
